@@ -6,10 +6,61 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag('application') %>
+
+    <script async src="https://unpkg.com/es-module-shims@1.2.0/dist/es-module-shims.js"></script>
+    <!-- <script type=importmap> -->
+    <!--   { -->
+    <!--     "imports": { -->
+    <!--       "application": "<%= asset_path('application.m.js') %>", -->
+    <!--       "foo": "<%= asset_path('foo.m.js') %>", -->
+    <!--       "bar": "<%= asset_path('bar.m.js') %>", -->
+    <!--       "local-time": "https://ga.jspm.io/npm:local-time@2.1.0/app/assets/javascripts/local-time.js" -->
+    <!--     } -->
+    <!--   } -->
+    <!-- </script> -->
+    <script type="importmap">
+      {
+              "imports": {
+          "application": "<%= asset_path('application.m.js') %>",
+          "foo": "<%= asset_path('foo.m.js') %>",
+          "bar": "<%= asset_path('bar.m.js') %>",
+          "local-time": "https://ga.jspm.io/npm:local-time@2.1.0/app/assets/javascripts/local-time.js",
+                    "chroma-js": "https://ga.jspm.io/npm:chroma-js@2.4.2/chroma.js",
+                          "color": "https://ga.jspm.io/npm:color@4.2.3/index.js",
+                                "lit": "https://ga.jspm.io/npm:lit@2.5.0/index.js",
+                                      "local-time": "https://ga.jspm.io/npm:local-time@2.1.0/app/assets/javascripts/local-time.js"
+                                          },
+                                              "scopes": {
+                                                    "https://ga.jspm.io/": {
+                                                            "@lit/reactive-element": "https://ga.jspm.io/npm:@lit/reactive-element@1.5.0/reactive-element.js",
+                                                                    "color-convert": "https://ga.jspm.io/npm:color-convert@2.0.1/index.js",
+                                                                            "color-name": "https://ga.jspm.io/npm:color-name@1.1.4/index.js",
+                                                                                    "color-string": "https://ga.jspm.io/npm:color-string@1.9.1/index.js",
+                                                                                            "is-arrayish": "https://ga.jspm.io/npm:is-arrayish@0.3.2/index.js",
+                                                                                                    "lit-element/lit-element.js": "https://ga.jspm.io/npm:lit-element@3.2.2/lit-element.js",
+                                                                                                            "lit-html": "https://ga.jspm.io/npm:lit-html@2.5.0/lit-html.js",
+                                                                                                                    "lit-html/is-server.js": "https://ga.jspm.io/npm:lit-html@2.5.0/is-server.js",
+                                                                                                                            "simple-swizzle": "https://ga.jspm.io/npm:simple-swizzle@0.2.2/index.js"
+                                                                                                                                  }
+                                                                                                                                      }
+                                                                                                                                        }
+    </script>
+    <script type=module>
+      import 'application';
+      import LocalTime from "local-time"
+      import Color from "color"
+      LocalTime.start()
+
+      const color = Color('#7743CE').alpha(0.5).lighten(0.5);
+      console.log(color.hsl().string());
+    </script>
   </head>
 
   <body>
     <%= yield %>
+    <p>
+      Last time I had chocolate was <time datetime="2022-05-08T23:00:00+02:00" data-local="time-ago">8th of May</time>
+    </p>
   </body>
 </html>
